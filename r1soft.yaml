@@ -20,11 +20,13 @@
     - name: Power off iptables
       systemd:
         name: firewalld
-        state: stopped
+        state: disabled
+        permanent: yes
       ignore_errors: true
 
     - name: Get Key
-      shell: r1soft-setup --get-key http://backup.acirrustech.com   
+      shell: r1soft-setup --get-key http://backup.acirrustech.com 
+      notify: R1soft RESTART   
 
   handlers:
     - name: R1soft RESTART
